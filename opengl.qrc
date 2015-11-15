@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/sources">
+        <file>simple_fragment_shader.fsh</file>
+        <file>simple_vertex_shader.vsh</file>
+        <file>opengl_rt0.png</file>
+    </qresource>
+</RCC>
