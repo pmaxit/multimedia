@@ -151,7 +151,7 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *event){
     int deltax = event->x() - lastMousePosition.x();
     int deltay = event->y() - lastMousePosition.y();
 
-    if(event->buttons() & Qt::LeftButton){
+    if(1 || event->buttons() & Qt::LeftButton){
         alpha -= deltax;
         if(alpha<0)
             alpha+= 360;
@@ -176,6 +176,7 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *event){
 }
 
 void MyGLWidget::wheelEvent(QWheelEvent *event){
+
     int delta = event->delta();
     if(event->orientation() == Qt::Vertical){
         if(delta < 0)

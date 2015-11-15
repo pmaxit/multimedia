@@ -14,14 +14,17 @@ class MyGLWidget : public QOpenGLWidget
 public:
     MyGLWidget(QWidget *parent);
 
+    void wheelEvent(QWheelEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+
 protected:
     void initializeGL();
     void resizeGL(int width, int height);
     void paintGL();
 
-    void mousePressEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
-    void wheelEvent(QWheelEvent *event);
+
+
 
 signals:
 
@@ -44,6 +47,7 @@ private:
 
     /* Extra variables needed */
     GLint viewport[4];
+
 };
 
 #endif // MYGLWIDGET_H

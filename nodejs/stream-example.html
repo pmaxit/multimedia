@@ -34,9 +34,54 @@
 	<script type="text/javascript">
 		// Setup the WebSocket connection and start the player
 		var client = new WebSocket( 'ws://127.0.0.1:8084/' );
+		var ws = new WebSocket( 'ws://127.0.0.1:8080/' );
 
-		var canvas = document.getElementById('videoCanvas');
+    function wssend(){
+      ws.send("Message to send");
+      alert("Message is sent");
+    }
+
+    function MouseWheelHandler(e){
+      var e = window.event || e;
+      var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+      var msg = "3 " + delta
+      ws.send(msg);
+    }
+
+    function attachEvent(e){
+
+      e = e || window.event;
+      console.log("X : "+ e.pageX + "Y: "+ e.pageY);
+      var msg = "1 " + e.pageX + " " + e.pageY;
+      ws.send(msg);
+      this.onmousemove = getPos;
+      this.onmouseout = unattachevent;
+      this.onmouseup = unattachevent;
+
+      return false;
+    }
+
+    function unattachevent(){
+      this.onmousemove = null;
+      this.onmouseup = null;
+      this.onmouseout = null;
+
+      // wait for mouse to come back
+      this.onmouseover = attachevent;
+    }
+
+  function getPos(e){
+    e = e || window.event;
+    var msg = "2 " + e.pageX + " " + e.pageY;
+    ws.send(msg);
+    //console.log("X : "+ e.pageX + "Y: "+ e.pageY);
+  }
+
+    var canvas = document.getElementById('videoCanvas');
 		var player = new jsmpeg(client, {canvas:canvas});
-	</script>
+
+    canvas.addEventListener('mousewheel', MouseWheelHandler, false);
+    canvas.onmousedown = attachEvent;
+  </script>
 </body>
 </html>
